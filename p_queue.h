@@ -7,30 +7,24 @@
 #include <iostream>
 #include <vector>
 
-template<class T, class Comparator = std::greater<T> >
+template<class T, class Comparator>
 class p_queue {
 
     std::vector<T> que;
-    Comparator comparator;
+    Comparator comp;
 
 public:
 
-    T pop() {
-        T value = que.front();
-        que.erase(que.begin());
-        return value;
+    T pop();
+    void push(T elem) {
+        que.insert();
     }
 
-    void push(T e) {
+    int size();
+    bool empty();
 
-    }
-    int size() {
-        return que.size();
-    }
-    bool empty() {
-        return que.empty();
-    }
 };
+
 
 
 #endif //PROGRAMMERINGSMETODIK_LABB3_P_QUEUE_H
