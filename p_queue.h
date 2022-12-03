@@ -17,11 +17,11 @@ class p_queue {
     /**
      * Used to find the position of insertion
      * @param value - Value to check insertion
-     * @return - Iterator for position, otherwise end of list will be returned
+     * @return - Iterator for position to insert, otherwise end of list will be returned
      */
     typename std::list<T>::iterator insertPosition(T value) {
         for (typename std::list<T>::iterator i = que.begin(); i != que.end() ; i++) {
-            if (comp(*i, value)) {
+            if (comp(value, *i)) {
                 return i;
             }
         }
@@ -29,12 +29,10 @@ class p_queue {
     }
 
 public:
-
-    p_queue(Comparator comp = Comparator()) : comp(comp) {
-    }
-
     T pop() {
-
+        T returnValue = que.front();
+        que.pop_front();
+        return returnValue;
     }
     void push(T elem) {
         que.insert(insertPosition(elem), elem);
