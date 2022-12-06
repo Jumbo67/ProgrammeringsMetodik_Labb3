@@ -7,6 +7,7 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include "algorithm"
 
 template<class T, class Comparator = std::less<>>
 class p_queue {
@@ -14,19 +15,6 @@ class p_queue {
     std::list<T> que;
     Comparator comp;
 
-    /**
-     * Used to find the position of insertion
-     * @param value - Value to check insertion
-     * @return - Iterator for position to insert, otherwise end of list will be returned
-     */
-    typename std::list<T>::iterator insertPosition(T value) {
-        for (typename std::list<T>::iterator i = que.begin(); i != que.end() ; i++) {
-            if (comp(value, *i)) {
-                return i;
-            }
-        }
-        return que.end();
-    }
 
 public:
     T pop() {
@@ -35,8 +23,9 @@ public:
         return returnValue;
     }
     void push(T elem) {
-        que.insert(insertPosition(elem), elem);
-    }
+        que.insert(std::lower_bound(que.begin(), que.end(), elem, comp), elem);
+        ;
+    } // lower_bound
 
     int size(){
         return que.size();
@@ -46,6 +35,22 @@ public:
     }
 
 };
+
+
+/**
+ *     * Used to find the position of insertion
+     * @param value - Value to check insertion
+     * @return - Iterator for position to insert
+typename std::list<T>::iterator insertPosition(T value) {
+    for (typename std::list<T>::iterator i = que.begin(); i != que.end() ; i++) {
+        if (comp(value, *i)) {
+            return i;
+        }
+    }
+    return que.end();
+}
+*/
+
 
 
 
